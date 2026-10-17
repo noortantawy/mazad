@@ -1,0 +1,308 @@
+<title>Mazad Playbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: sticky section nav on top, single reading column (~72ch) with wider tables/cards in a 1080px shell */
+:root{
+  --bg:#F2F5F3; --surface:#FFFFFF; --fg:#14201E; --muted:#556560; --line:#D5DDD9;
+  --teal:#0E5C55; --teal-soft:#DCEEEA; --brass:#B97800; --brass-soft:#F8EBCF;
+  --good:#1E7A46; --warn:#B45309; --bad:#B42318;
+  --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E1614; --surface:#16211E; --fg:#E7EEEB; --muted:#9BAAA5; --line:#2A3A36;
+  --teal:#5CC2B4; --teal-soft:#16332F; --brass:#F0B43C; --brass-soft:#3A2D0E;
+  --good:#58C98A; --warn:#F0A34C; --bad:#F08A80; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1614; --surface:#16211E; --fg:#E7EEEB; --muted:#9BAAA5; --line:#2A3A36;
+  --teal:#5CC2B4; --teal-soft:#16332F; --brass:#F0B43C; --brass-soft:#3A2D0E;
+  --good:#58C98A; --warn:#F0A34C; --bad:#F08A80; color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font:16px/1.6 var(--body);padding-inline:16px}
+.shell{max-width:1080px;margin-inline:auto}
+header.top{padding-block:40px 24px;border-bottom:1px solid var(--line)}
+.kicker{font:500 12px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--brass)}
+h1{font:700 clamp(2rem,6vw,3.6rem)/1.05 var(--display);margin:8px 0 12px;text-wrap:balance;letter-spacing:-.02em}
+h1 em{font-style:normal;color:var(--teal)}
+.lede{font-size:1.1rem;color:var(--muted);max-width:68ch;margin:0}
+nav.sec{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);margin-inline:-16px;padding:8px 16px;overflow-x:auto;white-space:nowrap;display:flex;gap:6px}
+nav.sec a{font:500 13px var(--body);color:var(--muted);text-decoration:none;padding:6px 12px;border-radius:999px}
+nav.sec a:hover,nav.sec a:focus-visible{background:var(--teal-soft);color:var(--teal);outline:none}
+section{padding-block:44px 8px;scroll-margin-top:56px}
+h2{font:700 clamp(1.5rem,3.5vw,2.1rem)/1.15 var(--display);margin:0 0 6px;text-wrap:balance;letter-spacing:-.01em}
+h3{font:600 1.05rem var(--display);margin:0 0 6px}
+.sub{color:var(--muted);margin:0 0 22px;max-width:68ch}
+p{max-width:70ch;margin:0 0 12px}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px;min-width:0}
+.card p{margin:0 0 8px;font-size:.95rem}
+.card p:last-child{margin:0}
+.verdict{background:var(--teal);color:#fff;border-radius:12px;padding:24px;margin-top:24px}
+:root[data-theme="dark"] .verdict,:root:not([data-theme="light"]) .verdict{color:var(--fg)}
+.verdict h3{font-size:1.25rem;color:inherit}
+.verdict p{max-width:75ch}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .verdict{background:var(--teal-soft);border:1px solid var(--teal)}}
+:root[data-theme="dark"] .verdict{background:var(--teal-soft);border:1px solid var(--teal)}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:620px;font-size:.92rem}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:var(--bg)}
+tr:last-child td{border-bottom:0}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+.pill{display:inline-block;font:500 11px var(--mono);letter-spacing:.04em;padding:2px 8px;border-radius:999px;background:var(--teal-soft);color:var(--teal);white-space:nowrap}
+.pill.b{background:var(--brass-soft);color:var(--brass)}
+.pill.r{background:var(--bg);color:var(--bad);border:1px solid var(--line)}
+ul.t{margin:0;padding-left:1.15em}
+ul.t li{margin-bottom:6px}
+.two{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.label{font:500 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;display:block}
+.lane{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.step{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--teal);border-radius:8px;padding:14px;min-width:0}
+.step b{display:block;font:600 .95rem var(--display);margin-bottom:4px}
+.step span{font-size:.88rem;color:var(--muted)}
+.bar{display:flex;height:28px;border-radius:6px;overflow:hidden;margin:8px 0 6px;border:1px solid var(--line)}
+.bar i{display:block;height:100%}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.85rem;color:var(--muted)}
+.legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;background:var(--c)}
+.hit{counter-reset:h;display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.hit .card h3{color:var(--teal)}
+.note{font-size:.85rem;color:var(--muted);margin-top:10px;max-width:80ch}
+.callout{border-left:3px solid var(--brass);background:var(--brass-soft);padding:12px 16px;border-radius:0 8px 8px 0;max-width:75ch;margin:14px 0}
+.callout p{margin:0;font-size:.95rem}
+code{font:500 .85em var(--mono);background:var(--teal-soft);color:var(--teal);padding:1px 6px;border-radius:4px}
+footer{padding-block:40px 56px;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line);margin-top:48px}
+footer a{color:var(--teal)}
+.src{columns:2 320px;column-gap:24px}
+.src li{margin-bottom:4px;break-inside:avoid}
+a{color:var(--teal)}
+:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+
+<div class="shell">
+<header class="top">
+  <div class="kicker">Egypt · online auctions · working name "Mazad" (مزاد)</div>
+  <h1>Bid on anything. <em>Pay only if you mean it.</em></h1>
+  <p class="lede">Market findings, positioning, business plan and product build plan for an Egyptian auction marketplace with four screens (Explore, Buy, Sell, Profile) and a 1% bid deposit that proves buyers can pay. Written 16 Oct 2026.</p>
+</header>
+
+<nav class="sec" aria-label="Sections">
+  <a href="#verdict">Verdict</a><a href="#market">Market</a><a href="#competition">Competition</a><a href="#positioning">Positioning</a><a href="#hit">What makes it a hit</a><a href="#business">Business plan</a><a href="#product">Product</a><a href="#build">Build plan</a><a href="#roadmap">Roadmap</a><a href="#risks">Risks</a>
+</nav>
+
+<section id="verdict">
+  <h2>Verdict: worth building, as a niche</h2>
+  <p class="sub">A general "eBay for Egypt" is a weak bet. A focused auction app with a verified-buyer deposit and a clear trust story has a real shot.</p>
+  <div class="grid">
+    <div class="card"><span class="pill">Good sign</span><h3>Payments are ready</h3><p>InstaPay had about 12.5M users and nearly 1.5B transactions in 2024 (CBE). A 1% deposit hold is realistic through Paymob, Fawry or InstaPay.</p></div>
+    <div class="card"><span class="pill">Good sign</span><h3>E-commerce keeps growing</h3><p>One estimate puts Egypt at about $10.2B in 2025 and $19.3B by 2030. Estimates differ a lot by source, so read it as direction, not a fact.</p></div>
+    <div class="card"><span class="pill">Good sign</span><h3>Your deposit idea fits the pain</h3><p>Fake bidders and no-shows are the main reason auctions fail in cash-and-negotiation markets. A deposit solves it directly.</p></div>
+    <div class="card"><span class="pill r">Warning</span><h3>Several have tried</h3><p>Belmazad, Mazadat, yaBalash, AllaOna and others exist. None looks dominant in general goods, and Dubizzle and Facebook Marketplace own second-hand.</p></div>
+  </div>
+  <div class="verdict">
+    <h3>Recommendation</h3>
+    <p>Launch in one category where price is uncertain and fakes are a worry (sneakers, phones and electronics, or collectibles). Add verification for that category. Prove it with 20 to 30 real sellers and about 200 buyers before widening.</p>
+    <p>As a portfolio project it is strong regardless: realtime bidding, payments, concurrency and trust design.</p>
+  </div>
+</section>
+
+<section id="market">
+  <h2>Market findings</h2>
+  <p class="sub">Numbers come from press and research pages that often disagree. Use them for direction.</p>
+  <div class="tbl"><table>
+    <tr><th>Area</th><th>Finding</th><th>Confidence</th></tr>
+    <tr><td>E-commerce size</td><td>About $10.2B (2025) heading to $19.3B (2030), 13.5% CAGR in one estimate. ECDB lists about $2.3B for 2025, so scope differs.</td><td><span class="pill b">Mixed</span></td></tr>
+    <tr><td>Instant payments</td><td>InstaPay 2024: ~1.5B transactions worth EGP 2.9T, ~12.5M users. Q1 2025: 263M transactions, over EGP 1.2T.</td><td><span class="pill">High (CBE)</span></td></tr>
+    <tr><td>Mobile wallets</td><td>Telecom wallets reported 46.3M active in Q2 2025 by a paid research firm. Older forecast: 57.9M wallets by 2025.</td><td><span class="pill b">Medium</span></td></tr>
+    <tr><td>Merchant acceptance</td><td>A June 2024 CBE directive requires merchants above EGP 500k turnover to accept digital payments.</td><td><span class="pill b">Medium</span></td></tr>
+    <tr><td>Second-hand attitude</td><td>Stigma around used goods has fallen. Furniture and appliances grew 40% year on year on OLX in 2018.</td><td><span class="pill b">Dated</span></td></tr>
+    <tr><td>Used goods volume</td><td>Only old data found: EGP 4.2B of used goods listed on OLX in H1 2016. No current share figure exists in public sources.</td><td><span class="pill r">Gap</span></td></tr>
+  </table></div>
+  <p class="note">Gaps to fill yourself: current Dubizzle and Marketplace volumes, Egyptian rules on holding customer deposits, and willingness to pay for verification. A 30-person interview round answers most of this.</p>
+</section>
+
+<section id="competition">
+  <h2>Who is already here</h2>
+  <p class="sub">Auctions in Egypt are real but fragmented. The gap is trust plus a good consumer experience, not the idea itself.</p>
+  <div class="tbl"><table>
+    <tr><th>Player</th><th>Focus</th><th>Model</th><th>What to learn</th></tr>
+    <tr><td><strong>Belmazad</strong></td><td>Real estate</td><td>3-day online auctions, Banque Misr invested (2024)</td><td>Institutional partners give instant credibility.</td></tr>
+    <tr><td><strong>Mazadat</strong></td><td>General goods</td><td>Timed auctions, Buy-Now, hybrid, physical drop-off centers</td><td>Logistics is the real moat, and also the cost.</td></tr>
+    <tr><td><strong>yaBalash</strong></td><td>Used products</td><td>Bidding on used items, founded about 2020</td><td>Low-key presence, so brand is open.</td></tr>
+    <tr><td><strong>AllaOna</strong></td><td>Cars</td><td>Connects buyers and sellers</td><td>High-ticket verticals attract bidding.</td></tr>
+    <tr><td><strong>ElMazadat</strong></td><td>Penny auction</td><td>Bidders buy tokens to enter</td><td>Token models feel like gambling. Avoid.</td></tr>
+    <tr><td><strong>Dubizzle / Facebook Marketplace</strong></td><td>Classifieds</td><td>Free fixed-price listings, negotiation by chat</td><td>The real competitor for attention. Beat them on trust and fun.</td></tr>
+  </table></div>
+</section>
+
+<section id="positioning">
+  <h2>Positioning ideas</h2>
+  <p class="sub">Pick one. Each is a different promise to a different buyer.</p>
+  <div class="grid">
+    <div class="card"><span class="pill b">Recommended</span><h3>"Real buyers only"</h3><p>Every bidder has put 1% down, so sellers never chase a no-show. Pair it with verified items in one category.</p><p><strong>Tagline:</strong> مزاد بجد — a real auction.</p></div>
+    <div class="card"><h3>The sneaker and streetwear vault</h3><p>Authenticated pairs, drops that end on a countdown, a collector community.</p><p><strong>Tagline:</strong> Every pair, checked. Every bid, real.</p></div>
+    <div class="card"><h3>Smart used electronics</h3><p>Phones and laptops with tested battery and IMEI check, starting at EGP 1 so the market sets the price.</p><p><strong>Tagline:</strong> بالسعر اللي السوق يقوله — the market's price.</p></div>
+    <div class="card"><h3>Collectors and vintage</h3><p>Coins, watches, art, antiques. Value is subjective, which is where bidding wins most.</p><p><strong>Tagline:</strong> Found something rare? Let people fight for it.</p></div>
+  </div>
+  <div class="callout"><p><strong>Voice:</strong> Egyptian Arabic first, light humor, no corporate tone. Franco-Arabic works in marketing. Keep prices in EGP, never show other currencies.</p></div>
+</section>
+
+<section id="hit">
+  <h2>What could make it a hit</h2>
+  <p class="sub">Auctions grow on excitement and trust. These are the levers, ranked by impact.</p>
+  <div class="hit">
+    <div class="card"><h3>1. Trust you can see</h3><p>Verified seller badge (national ID check), verified item tag, escrow-style payment release only after delivery is confirmed. This beats Facebook where scams are common.</p></div>
+    <div class="card"><h3>2. Start at EGP 1, end with a story</h3><p>"Open to highest bidder" listings create viral moments: someone sells a sofa for far more than expected and shares it. Feature these.</p></div>
+    <div class="card"><h3>3. Live countdown feeling</h3><p>Realtime price updates, "3 people watching", anti-sniping extension, outbid push notifications. This is what pulls people back daily.</p></div>
+    <div class="card"><h3>4. Trending feed as the home screen</h3><p>Your Explore tab: trending now, ending in the next hour, new today. It should feel alive even with few listings.</p></div>
+    <div class="card"><h3>5. Delivery handled for them</h3><p>Partner with Bosta, Aramex or similar for pickup and delivery, with cash on delivery for the final amount. Delivery friction kills most Egyptian marketplaces.</p></div>
+    <div class="card"><h3>6. Seller tools that earn trust</h3><p>Reserve price, scheduled start, relist in one tap, simple earnings page. Sellers are your scarce side, so make them feel looked after.</p></div>
+    <div class="card"><h3>7. Share-first design</h3><p>Every auction has a WhatsApp-ready card with a live countdown. Most Egyptian traffic starts in chats and groups.</p></div>
+    <div class="card"><h3>8. Community and drops</h3><p>Themed weekly auctions ("Friday phones", "Vinyl night"), creators hosting drops, leaderboards for top collectors.</p></div>
+  </div>
+</section>
+
+<section id="business">
+  <h2>Business plan</h2>
+  <p class="sub">All figures below are planning assumptions to test, not facts.</p>
+
+  <div class="two">
+    <div class="card">
+      <span class="label">Who pays, and how</span>
+      <ul class="t">
+        <li><strong>Seller fee:</strong> 5% to 8% of the final price, only when it sells. Start at 5% to attract sellers.</li>
+        <li><strong>Verification fee:</strong> flat EGP 50 to 150 per item for authentication or inspection (category dependent).</li>
+        <li><strong>Boosts:</strong> featured listing on Explore, EGP 30 to 100.</li>
+        <li><strong>Delivery margin:</strong> small mark-up on partner shipping.</li>
+        <li><strong>Later:</strong> seller subscription for power sellers, ads from brands in the niche.</li>
+      </ul>
+      <p class="note">The 1% deposit is not revenue. It is held and refunded or applied. Payment partner holds the funds, which avoids holding customer money yourself.</p>
+    </div>
+    <div class="card">
+      <span class="label">Illustrative unit economics (one electronics sale)</span>
+      <div class="tbl" style="border:0;background:transparent"><table style="min-width:0">
+        <tr><td>Final price</td><td class="n">EGP 8,000</td></tr>
+        <tr><td>Seller fee (6%)</td><td class="n">+ EGP 480</td></tr>
+        <tr><td>Verification</td><td class="n">+ EGP 100</td></tr>
+        <tr><td>Payment processing (about 2.5%)</td><td class="n">− EGP 200</td></tr>
+        <tr><td>Inspection cost</td><td class="n">− EGP 60</td></tr>
+        <tr><td>Support and dispute reserve</td><td class="n">− EGP 50</td></tr>
+        <tr><td><strong>Contribution</strong></td><td class="n"><strong>EGP 270</strong></td></tr>
+      </table></div>
+      <p class="note">Check these against real quotes from Paymob, a courier and a repair shop before trusting them.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:26px">Where the money goes in year one (assumed split of a small seed budget)</h3>
+  <div class="bar" role="img" aria-label="Budget split: product 35 percent, seller acquisition 30 percent, trust and verification 20 percent, operations 15 percent">
+    <i style="width:35%;background:var(--teal)"></i><i style="width:30%;background:var(--brass)"></i><i style="width:20%;background:var(--good)"></i><i style="width:15%;background:var(--muted)"></i>
+  </div>
+  <div class="legend"><span style="--c:var(--teal)">Product 35%</span><span style="--c:var(--brass)">Seller acquisition 30%</span><span style="--c:var(--good)">Trust and verification 20%</span><span style="--c:var(--muted)">Operations 15%</span></div>
+
+  <h3 style="margin-top:26px">Go-to-market</h3>
+  <div class="lane">
+    <div class="step"><b>Seed supply first</b><span>Recruit 20 to 30 sellers by hand from Facebook groups and Instagram shops. Waive fees for the first 60 days.</span></div>
+    <div class="step"><b>Pull buyers in</b><span>Share live auctions in WhatsApp and Telegram groups. Referral credit of EGP 50 toward the deposit.</span></div>
+    <div class="step"><b>Weekly events</b><span>One themed auction night a week with a hero item at a low start price.</span></div>
+    <div class="step"><b>Creators</b><span>Pay niche creators in the category to host a drop and bid live.</span></div>
+    <div class="step"><b>Expand by city</b><span>Cairo and Giza first, then Alexandria, once delivery works smoothly.</span></div>
+  </div>
+
+  <h3 style="margin-top:26px">Metrics that matter</h3>
+  <div class="tbl"><table>
+    <tr><th>Metric</th><th>Why it matters</th><th class="n">Early target</th></tr>
+    <tr><td>Sell-through rate</td><td>Share of auctions that get at least one bid and complete</td><td class="n">above 60%</td></tr>
+    <tr><td>Bids per auction</td><td>Shows real competition and excitement</td><td class="n">above 5</td></tr>
+    <tr><td>Deposit to first bid conversion</td><td>Tests whether the 1% rule scares buyers away</td><td class="n">above 40%</td></tr>
+    <tr><td>Payment completion by winners</td><td>Shows the deposit works</td><td class="n">above 90%</td></tr>
+    <tr><td>Repeat sellers at 30 days</td><td>Supply is the scarce side</td><td class="n">above 40%</td></tr>
+  </table></div>
+  <p class="note">Targets are starting guesses. Adjust after the first 100 auctions.</p>
+</section>
+
+<section id="product">
+  <h2>Product: four screens</h2>
+  <p class="sub">Mobile-first with a bottom tab bar. Desktop gets a top nav. Arabic and English with RTL, prices in EGP.</p>
+  <div class="grid">
+    <div class="card"><span class="pill">Tab 1</span><h3>Explore</h3><ul class="t"><li>Trending now, ranked by bids and watchers in the last 24 hours</li><li>Ending soon with live countdowns</li><li>Category grid and chips</li><li>Realtime price on every card</li></ul></div>
+    <div class="card"><span class="pill">Tab 2</span><h3>Buy</h3><ul class="t"><li>Search plus filters: time left, budget, starting price, category, city, condition</li><li>Auction page with gallery, bid history, quick-bid buttons</li><li>First bid holds a 1% deposit, with a clear explanation</li><li>Watchlist and outbid alerts</li></ul></div>
+    <div class="card"><span class="pill">Tab 3</span><h3>Sell</h3><ul class="t"><li>Steps: photos, details, price mode, duration</li><li>Price mode: starting price, or open to highest bidder</li><li>Hidden reserve: "don't sell below X"</li><li>Timed or open-ended until the seller accepts</li><li>Seller dashboard with live bids</li></ul></div>
+    <div class="card"><span class="pill">Tab 4</span><h3>Profile</h3><ul class="t"><li>My bids: winning, outbid, won, lost</li><li>My listings and earnings</li><li>Wallet: top up, held amount, history</li><li>Verification status, language, settings</li></ul></div>
+  </div>
+
+  <h3 style="margin-top:26px">Auction rules</h3>
+  <div class="tbl"><table>
+    <tr><th>Rule</th><th>Decision</th></tr>
+    <tr><td>Deposit</td><td>1% of the starting price, held once per auction on a bidder's first bid. Losers are refunded automatically. The winner's deposit counts toward the price.</td></tr>
+    <tr><td>Open to highest bidder</td><td>Starting price is EGP 1. No minimum. Use the reserve if the seller wants a floor.</td></tr>
+    <tr><td>Reserve price</td><td>Hidden. If not met at close, no sale and everyone is refunded.</td></tr>
+    <tr><td>Minimum raise</td><td>Increment scales with price (for example EGP 5 under 500, EGP 25 under 5,000, EGP 100 above).</td></tr>
+    <tr><td>Anti-sniping</td><td>A bid in the last 2 minutes extends the end by 2 minutes.</td></tr>
+    <tr><td>Winner does not pay</td><td>Deposit is forfeited, strike on account, repeated strikes lead to a ban. The seller can offer the item to the next bidder.</td></tr>
+    <tr><td>Seller conduct</td><td>Sellers cannot bid on their own items. Cancelling after bids needs a reason and affects seller rating.</td></tr>
+  </table></div>
+  <p class="note">The deposit rule needs a legal check, since holding customer funds can require a licensed payment partner.</p>
+</section>
+
+<section id="build">
+  <h2>Build plan</h2>
+  <p class="sub">Already approved: responsive web on Next.js, Supabase backend, mock wallet first, Paymob later.</p>
+  <div class="two">
+    <div class="card">
+      <span class="label">Stack</span>
+      <ul class="t"><li>Next.js App Router, TypeScript, Tailwind, shadcn/ui</li><li>Supabase: Postgres, Auth, Storage, Realtime</li><li>Bidding and closing live in Postgres functions <code>place_bid</code> and <code>close_auction</code>, so the rules cannot be bypassed from the browser</li><li>A scheduled job closes ended auctions</li><li>Payments behind one adapter: mock wallet now, Paymob or Fawry later</li></ul>
+    </div>
+    <div class="card">
+      <span class="label">Data model</span>
+      <ul class="t"><li><code>profiles</code> with wallet balance and held amount</li><li><code>categories</code>, <code>auctions</code>, <code>bids</code></li><li><code>deposits</code> (held, refunded, applied)</li><li><code>wallet_tx</code> ledger</li><li><code>watchlist</code></li></ul>
+    </div>
+  </div>
+</section>
+
+<section id="roadmap">
+  <h2>Roadmap</h2>
+  <p class="sub">About 12 weeks from first line of code to a small private launch. Timing assumes one developer working part-time alongside studies.</p>
+  <div class="lane">
+    <div class="step"><b>Weeks 1–2: Foundation</b><span>Scaffold, schema, security rules, seed data, sign-in.</span></div>
+    <div class="step"><b>Weeks 3–5: Explore and Buy</b><span>Feed, search, filters, auction page, <code>place_bid</code>, realtime.</span></div>
+    <div class="step"><b>Weeks 6–7: Sell</b><span>Listing flow, photo upload, reserve, seller dashboard.</span></div>
+    <div class="step"><b>Weeks 8–9: Profile and wallet</b><span>Deposit lifecycle, auction closing, strikes.</span></div>
+    <div class="step"><b>Weeks 10–11: Polish</b><span>Arabic RTL, notifications, share cards, speed.</span></div>
+    <div class="step"><b>Week 12: Private launch</b><span>Invite sellers in one category, watch the metrics above, fix what breaks.</span></div>
+  </div>
+  <div class="callout"><p><strong>After launch:</strong> real payments with Paymob, delivery partner integration, verification workflow, a mobile app in Expo reusing the same backend.</p></div>
+</section>
+
+<section id="risks">
+  <h2>Risks and how to handle them</h2>
+  <div class="tbl"><table>
+    <tr><th>Risk</th><th>Impact</th><th>Response</th></tr>
+    <tr><td>Not enough sellers or buyers at once</td><td><span class="pill r">High</span></td><td>One niche, one city, hand-recruited sellers, themed auction nights to concentrate bidders.</td></tr>
+    <tr><td>Scams and wrong items</td><td><span class="pill r">High</span></td><td>ID-verified sellers, verified-item tag, payment released after delivery confirmation.</td></tr>
+    <tr><td>Sellers take winners off-platform</td><td><span class="pill b">Medium</span></td><td>Low fees, escrow protection, ratings and seller tools that are only useful on-platform.</td></tr>
+    <tr><td>Free competitors with huge audiences</td><td><span class="pill b">Medium</span></td><td>Do not compete on listings volume. Win on trust and excitement in one category.</td></tr>
+    <tr><td>Buyers dislike the deposit</td><td><span class="pill b">Medium</span></td><td>Explain it as a refundable guarantee, offer referral credit, measure conversion and tune.</td></tr>
+    <tr><td>Payment and legal rules</td><td><span class="pill r">High</span></td><td>Use a licensed payment partner to hold funds. Get a local lawyer to review terms and consumer rules before launch.</td></tr>
+    <tr><td>Delivery quality</td><td><span class="pill b">Medium</span></td><td>Start with local pickup and one courier partner. Track delivery success as a core metric.</td></tr>
+  </table></div>
+</section>
+
+<footer>
+  <strong>Sources</strong>
+  <ul class="src">
+    <li><a href="https://invest-gate.me/?p=61333">Belmazad introduction</a></li>
+    <li><a href="https://enterpriseam.com/egypt/2024/12/04/banque-misr-concludes-egypts-first-ever-public-sector-online-real-estate-auction-with-belmazad/">Banque Misr online auction</a></li>
+    <li><a href="https://www.cbinsights.com/company/mazadat">Mazadat, CB Insights</a></li>
+    <li><a href="https://startuplist.africa/startup/yabalash">yaBalash</a></li>
+    <li><a href="https://startuplist.africa/startup/allaona">AllaOna</a></li>
+    <li><a href="https://meatechwatch.com/?p=31581">Egypt e-commerce forecast</a></li>
+    <li><a href="https://www.businesstodayegypt.com/amp/1/5820/CBE-extends-fee-waiver-for-InstaPay-transfer-services-for-additional">InstaPay figures</a></li>
+    <li><a href="https://egyptianstreets.com/2018/07/05/olx-launches-buy-used-items-campaign-as-social-stigma-decreases">OLX and used items</a></li>
+  </ul>
+  <p style="margin-top:14px">Market figures are third-party estimates and may be outdated or inconsistent. Business numbers and targets are assumptions to validate, not forecasts. Not legal or financial advice.</p>
+</footer>
+</div>

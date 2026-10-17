@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #f2f5f3;
+  --surface: #ffffff;
+  --fg: #14201e;
+  --muted: #556560;
+  --line: #d5ddd9;
+  --teal: #0e5c55;
+  --teal-soft: #dceeea;
+  --brass: #b97800;
+  --brass-soft: #f8ebcf;
+  --good: #1e7a46;
+  --bad: #b42318;
+  --on-teal: #ffffff;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0e1614;
+    --surface: #16211e;
+    --fg: #e7eeeb;
+    --muted: #9baaa5;
+    --line: #2a3a36;
+    --teal: #5cc2b4;
+    --teal-soft: #16332f;
+    --brass: #f0b43c;
+    --brass-soft: #3a2d0e;
+    --good: #58c98a;
+    --bad: #f08a80;
+    --on-teal: #07201c;
+    color-scheme: dark;
+  }
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-teal: var(--teal);
+  --color-teal-soft: var(--teal-soft);
+  --color-brass: var(--brass);
+  --color-brass-soft: var(--brass-soft);
+  --color-good: var(--good);
+  --color-bad: var(--bad);
+  --color-on-teal: var(--on-teal);
+  --font-display: var(--font-display);
+  --font-sans: var(--font-body);
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body), "Segoe UI", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 { font-family: var(--font-display), "Segoe UI", system-ui, sans-serif; text-wrap: balance; }
+.tnum { font-variant-numeric: tabular-nums; }
+:focus-visible { outline: 2px solid var(--brass); outline-offset: 2px; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; border-radius: .5rem; padding: .6rem 1rem; font-weight: 600; font-size: .95rem; transition: opacity .15s; cursor: pointer; }
+.btn:disabled { opacity: .5; cursor: not-allowed; }
+.btn-primary { background: var(--teal); color: var(--on-teal); }
+.btn-ghost { border: 1px solid var(--line); background: var(--surface); }
+.input { width: 100%; border: 1px solid var(--line); background: var(--surface); border-radius: .5rem; padding: .6rem .75rem; font-size: .95rem; }
+.label { display: block; font-size: .8rem; font-weight: 600; color: var(--muted); margin-bottom: .3rem; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: .75rem; }
