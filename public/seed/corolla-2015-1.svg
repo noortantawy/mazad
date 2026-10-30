@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Toyota Corolla 2015, one owner">
+<defs><linearGradient id="g0" x1="85.35533905932738%" y1="14.644660940672622%" x2="14.64466094067263%" y2="85.35533905932738%"><stop offset="0" stop-color="#2a3b4a"/><stop offset="1" stop-color="#7fa1bf"/></linearGradient></defs>
+<rect width="800" height="600" fill="url(#g0)"/>
+<circle cx="660" cy="110" r="190" fill="#fff" fill-opacity=".08"/><circle cx="120" cy="520" r="150" fill="#000" fill-opacity=".12"/>
+<g transform="translate(268 168) scale(11)" fill="none" stroke="#fff" stroke-opacity=".92" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 16l1.5-5a2 2 0 011.9-1.4h7.2a2 2 0 011.9 1.4L19 16M4 16h16v3H4zM7 19v1M17 19v1"/></g>
+</svg>

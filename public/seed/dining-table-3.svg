@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Solid wood dining table with 6 chairs">
+<defs><linearGradient id="g2" x1="90.9576022144496%" y1="78.67882181755229%" x2="9.0423977855504%" y2="21.32117818244771%"><stop offset="0" stop-color="#3b2a1a"/><stop offset="1" stop-color="#c19a6b"/></linearGradient></defs>
+<rect width="800" height="600" fill="url(#g2)"/>
+<rect x="-60" y="380" width="920" height="260" fill="#000" fill-opacity=".14" transform="rotate(-6 400 500)"/><circle cx="640" cy="130" r="120" fill="#fff" fill-opacity=".1"/><circle cx="440" cy="290" r="156" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="3"/>
+<g transform="translate(320 170) scale(10)" fill="none" stroke="#fff" stroke-opacity=".92" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11V8a2 2 0 012-2h12a2 2 0 012 2v3M3 11a2 2 0 012 2v2h14v-2a2 2 0 012-2M6 15v3M18 15v3"/></g>
+</svg>

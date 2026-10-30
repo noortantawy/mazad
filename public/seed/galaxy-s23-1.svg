@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Samsung Galaxy S23 Ultra 256GB">
+<defs><linearGradient id="g0" x1="85.35533905932738%" y1="14.644660940672622%" x2="14.64466094067263%" y2="85.35533905932738%"><stop offset="0" stop-color="#2d1f3d"/><stop offset="1" stop-color="#8e6bbf"/></linearGradient></defs>
+<rect width="800" height="600" fill="url(#g0)"/>
+<circle cx="660" cy="110" r="190" fill="#fff" fill-opacity=".08"/><circle cx="120" cy="520" r="150" fill="#000" fill-opacity=".12"/>
+<g transform="translate(268 168) scale(11)" fill="none" stroke="#fff" stroke-opacity=".92" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3h8a1 1 0 011 1v16a1 1 0 01-1 1H8a1 1 0 01-1-1V4a1 1 0 011-1zm4 15h.01"/></g>
+</svg>
